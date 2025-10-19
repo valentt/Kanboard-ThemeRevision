@@ -5,7 +5,7 @@
 	--size-width-comp: 220px;
 	--size-radius-def: 4px;
 
-	--style-fontfamily: "SF Pro Display", Calibri, Helvetica, Verdana, Arial, sans-serif;
+	--style-fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--style-fontfamily-code: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	--style-letterspacing: .02rem;
 	--style-border: 1px solid var(--color-greyscale-3);
@@ -135,7 +135,7 @@ button, .btn {
     min-width: 6rem;
     text-align: center;
 	box-shadow: var(--style-shadow-light);
-	font-weight: bold !important;
+	font-weight: 400;
 }
 .btn:disabled {
 	cursor: auto;
@@ -146,7 +146,7 @@ code{
 }
 h1, h2, h3, h1 a, h2 a, h3 a, .accordion-title{
 	line-height: 1.2em !important;
-	font-weight: bold !important;
+	font-weight: 400;
 	border: none !important;
 	margin: 0;
 }

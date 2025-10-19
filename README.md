@@ -193,9 +193,25 @@ Change `400` to:
 - `500` - Medium
 - `700` - Bold
 
-**Original Kanboard Font:**
-- Font-family: `"Helvetica Neue", Helvetica, Arial, sans-serif`
-- Font-weight: `400` (normal, not bold)
+**Default Font Information:**
+
+ThemeRevisionPlus now uses the exact same font as original Kanboard (updated 2025-10-19):
+
+| Theme | Font Family | Font Weight (Headings/Buttons) |
+|-------|-------------|-------------------------------|
+| **Original Kanboard** | `"Helvetica Neue", Helvetica, Arial, sans-serif` | `400` (normal) |
+| **ThemeRevisionPlus (old)** | `"SF Pro Display", Calibri, Helvetica, Verdana, Arial, sans-serif` | `bold` |
+| **ThemeRevisionPlus (current)** | `"Helvetica Neue", Helvetica, Arial, sans-serif` ✅ | `400` (normal) ✅ |
+
+**What Changed:**
+- Removed "SF Pro Display" and "Calibri" from default font stack
+- Changed heading (h1, h2, h3) and button font-weight from `bold` to `400` (normal)
+- Result: Identical font rendering as default Kanboard when Google Fonts is disabled
+
+**Font Files Modified:**
+- `Asset/dev/css/basics.css` (line 8): Default font-family
+- `Asset/dev/css/basics.css` (line 138, 149): Font-weight for buttons and headings
+- `Template/layout/head_google_fonts.php` (line 36): Fallback font when Google Fonts disabled
 
 #### Switching to Development Mode
 
