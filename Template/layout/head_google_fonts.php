@@ -9,7 +9,7 @@ if ($googleFontsEnabled) {
 
     foreach($configs as $key => $value){
         if (!empty(trim($value))){
-            $fonts .= "family=".str_replace(" ", "+", trim($value)).":wght@400;700&";
+            $fonts .= "family=".str_replace(" ", "+", trim($value)).":wght@300;400;500;700&";
             switch ($key){
                 case "ui":
                     $styles.= "--style-fontfamily:'".trim($value)."',sans-serif !important;";
