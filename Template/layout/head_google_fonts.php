@@ -29,11 +29,11 @@ if ($googleFontsEnabled) {
     <?php endif;
 
 } else {
-    // Google Fonts disabled - use system defaults
+    // Google Fonts disabled - use Kanboard default fonts
     ?>
     <style>
         :root {
-            --style-fontfamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+            --style-fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             --style-fontfamily-code: "Courier New", Courier, monospace !important;
         }
     </style>
