@@ -179,19 +179,44 @@ body {
 }
 ```
 
-**Method 3: Override Task Title Font Weight**
+**Method 3: Task Title Font Weight (Most Important)**
 
-The plugin forces `font-weight:400` (normal) for Dark V2 task titles. To change:
+Task titles and categories have their own font-weight settings separate from body text.
 
-Edit `Model/CustomColorModel.php` line 125-127:
-```php
-$buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
+**Primary Location:** `Asset/dev/css/board-task-list.css`
+
+```css
+/* Line 153 - Task Title Font Weight */
+body.TR .task-board-title a, body.TR .table-list-title a {
+    font-weight: 400;  /* Change this value */
+}
+
+/* Line 178 - Category/Tags Font Weight */
+.task-board-category, .task-tags li, .table-list-category, .task-list-tag {
+    font-weight: 400;  /* Change this value */
+}
+
+/* Line 200 - Category Links Font Weight */
+body.TR .task-board-category a, body.TR .table-list-category a{
+    font-weight: 400;  /* Change this value */
+}
 ```
-Change `400` to:
-- `300` - Light
-- `400` - Normal (current)
-- `500` - Medium
-- `700` - Bold
+
+**Font-Weight Values:**
+- `300` - Light (thinnest)
+- `400` - Normal (Kanboard default) ✅
+- `500` - Medium (good compromise)
+- `600` - Semi-bold
+- `700` - Bold (ThemeRevisionPlus old default)
+
+**Secondary Location (Color Schemes):** `Model/CustomColorModel.php` line 130-147
+
+This injects font-weight dynamically based on color scheme and reads from global config `font_weight`.
+
+**IMPORTANT:** If you modify `board-task-list.css`, you must:
+1. Switch to Development mode OR rebuild CSS in Production mode
+2. Clear cache: `rm -rf data/cache/*`
+3. Hard refresh browser (Ctrl+Shift+R)
 
 **Default Font Information:**
 
@@ -208,10 +233,26 @@ ThemeRevisionPlus now uses the exact same font as original Kanboard (updated 202
 - Changed heading (h1, h2, h3) and button font-weight from `bold` to `400` (normal)
 - Result: Identical font rendering as default Kanboard when Google Fonts is disabled
 
-**Font Files Modified:**
+**Font Files Modified (2025-10-19 & 2025-10-20):**
 - `Asset/dev/css/basics.css` (line 8): Default font-family
-- `Asset/dev/css/basics.css` (line 138, 149): Font-weight for buttons and headings
+- `Asset/dev/css/basics.css` (line 92): Added `text-rendering: optimizeLegibility`
+- `Asset/dev/css/basics.css` (line 135, 146): Font-weight for buttons and headings (400)
+- `Asset/dev/css/board-task-list.css` (line 153): Task title font-weight (400)
+- `Asset/dev/css/board-task-list.css` (line 178): Category/tags font-weight (400)
+- `Asset/dev/css/board-task-list.css` (line 200): Category links font-weight (400)
+- `Template/layout/head_google_fonts.php` (line 12): Google Fonts load all weights (300/400/500/700)
 - `Template/layout/head_google_fonts.php` (line 36): Fallback font when Google Fonts disabled
+
+**Removed Properties (to match Kanboard):**
+- ❌ `-webkit-font-smoothing: antialiased` (was in basics.css line 91)
+- ❌ `-moz-osx-font-smoothing: grayscale` (was in basics.css line 92)
+- ❌ `letter-spacing: .02rem` (was in basics.css body declaration)
+
+**Key Finding (2025-10-20):**
+ThemeRevisionPlus had `font-weight: bold` (700) for task titles in `board-task-list.css`, while original Kanboard uses normal weight (400). This made ALL task titles appear thicker/bolder than original. Simply changing `basics.css` was NOT enough - you must also modify `board-task-list.css`.
+
+**Task Detail Metadata Fix (2025-10-20):**
+Task detail metadata (Started, Created, Modified, Moved) was using light grey color (`#ccc`) which was unreadable on light pastel blue background. Changed to dark grey (`#333`) for proper contrast and readability. Modified in `Asset/dev/css/task-detail.css` lines 133 and 160.
 
 #### Switching to Development Mode
 

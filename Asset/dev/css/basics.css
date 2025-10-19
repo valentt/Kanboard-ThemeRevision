@@ -88,10 +88,8 @@ body {
 body {
 	background-color: var(--color-greyscale-4);
 	padding: .5rem 2rem;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	font-family: var(--style-fontfamily);
-	letter-spacing: var(--style-letterspacing);
+	text-rendering: optimizeLegibility;
 }
 body.TR a {
 	font-size: 1rem;
@@ -146,18 +144,20 @@ code{
 }
 h1, h2, h3, h1 a, h2 a, h3 a, .accordion-title{
 	line-height: 1.2em !important;
-	font-weight: 400;
 	border: none !important;
 	margin: 0;
 }
 h1, h1 a {
 	font-size: 2rem !important;
+	font-weight: 700;
 }
 h2, h2 a, .accordion-title {
 	font-size: 1.3rem !important;
+	font-weight: 700;
 }
 h3, h3 a {
 	font-size: 1rem !important;
+	font-weight: 400;
 }
 article {
 	line-height: 1.5rem;

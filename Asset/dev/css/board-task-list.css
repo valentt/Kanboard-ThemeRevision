@@ -104,7 +104,7 @@
 	line-height: var(--size-font-min);
 }
 body.TR .task-board-header > .dropdown * {
-	color: var(--color-greyscale-1);
+	color: rgba(0, 0, 0, 0.8);
 	font-size: var(--size-font-min);
 	line-height: var(--size-font-min);
 }
@@ -114,6 +114,7 @@ body.TR .task-board-header > .dropdown * {
 	margin-bottom: 1rem;
 	line-height: var(--size-font-min);
 	font-size: var(--size-font-min);
+	color: rgba(0, 0, 0, 0.8);
 }
 
 /* avatar */
@@ -150,7 +151,7 @@ body.TR .task-board-title{
 	margin-right: 1rem;
 }*/
 body.TR .task-board-title a, body.TR .table-list-title a {
-    font-weight: bold;
+    font-weight: 400;
 	line-height: calc(1rem + 6px);
 	font-size: 1rem;
 	color: var(--color-greyscale-1);
@@ -175,7 +176,7 @@ body.TR .task-board-title a, body.TR .table-list-title a {
     line-height: calc(1rem + 6px);
     padding: 0 4px;
     margin: 0 6px 6px 0 !important;
-    font-weight: bold;
+    font-weight: 500;
     font-size: var(--size-font-min);;
 	color: var(--color-greyscale-6);
     background: none !important;
@@ -197,7 +198,7 @@ body.TR .task-board-title a, body.TR .table-list-title a {
 body.TR .task-board-category a, body.TR .table-list-category a{
     color: var(--color-greyscale-6);
 	font-size: var(--size-font-min);
-    font-weight: bold;
+    font-weight: 500;
 	line-height: calc(1rem + 6px);
 	display: contents;
 }
