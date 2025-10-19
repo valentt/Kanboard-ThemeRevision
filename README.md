@@ -106,17 +106,125 @@ git pull origin main
 * **Mobile features**: New mobile CSS/JS files are separate and won't affect custom styles
 
 ## Customization
-#### Colors / Icons / Fonts
-* Just go to the [settings panel](Screenshots/5.png): *`Settings -> ThemeRevision Settings`*   
-   > **or (< 1.0.9)**  
-   > Copy and move (**do not delete**) the file `config-default.php` to `config.php` in the plugin directory. Then edit the values according to the instructions in it.
 
-#### More Styles
-1. ***Make sure*** the folder `your_kanboard_root/plugins/ThemeRevision/Asset` is ***writable and executable***.
-2. Switch "Mode" to "Development" in the [settings panel](Screenshots/5.png).   
-   > **or (< 1.0.9)**  
-   > Switch "Mode" in the config file according to the alternative method mentioned in the previous section.
-3. Edit raw CSS files in the folder `Asset/dev`.
+### Basic Customization (UI Settings)
+Go to the [settings panel](Screenshots/5.png): *`Settings -> ThemeRevisionPlus Settings`*
+
+**Available Options:**
+- **Color Scheme**: User / Light / Dark / Dark V2 / Normal Dark
+- **Google Fonts**: Enable/disable + custom font name
+- **Icons**: Material Icons (default) or Font Awesome
+- **Corner Radius**: 0-20px for rounded elements
+- **Task Info Display**: Toggle task footer info
+- **Column Header**: Toggle column header info
+
+> **Note (< 1.0.9)**: Copy `config-default.php` to `config.php` and edit values directly
+
+---
+
+### Advanced Customization (Colors & Fonts)
+
+#### Understanding Color Schemes
+
+ThemeRevisionPlus provides **4 color palettes** defined in `Model/DefaultConfigsModel.php`:
+
+| Scheme | UI/Background | Task Colors | Font Color | Use Case |
+|--------|---------------|-------------|------------|----------|
+| **Light** | Light (#fff) | Light pastels | Black (#000) | Default light theme |
+| **Dark** | Dark (#302e35) | Dark muted colors | Grey (#ccc) | Custom dark theme |
+| **Dark V2** | Dark (#302e35) | Original Kanboard light colors | **Black (#000)** | Hybrid: Dark UI + Readable tasks |
+| **Normal Dark** | Dark (#302e35) | Light pastels | Black (#000) | Alternative dark |
+
+**Important**:
+- ⚠️ **Palette colors are loaded from CODE, not from database**
+- ⚠️ **Task color palettes are NOT editable in UI settings panel**
+- ✅ **Color scheme selection IS in UI settings panel**
+
+#### Changing Task Colors (Code-level)
+
+To modify task colors permanently:
+
+1. **Edit** `Model/DefaultConfigsModel.php`
+2. **Find** the palette you want to change (e.g., `'dark_v2_palette'`)
+3. **Modify** color values:
+   ```php
+   'task-blue-bg' => array('default' => '#dbebff'),  // Light blue background
+   'task-blue-bdr' => array('default' => '#a8cfff'), // Border color
+   ```
+4. **Deploy** to server and clear cache:
+   ```bash
+   rm -rf data/cache/*
+   ```
+5. **Hard refresh** browser (Ctrl+Shift+R)
+
+**Why Code-level?**
+- Palettes are design-time constants (like CSS files)
+- Database-stored colors became stale and prevented updates
+- Solution (implemented 2025-10-19): Plugin always loads fresh palettes from code
+
+#### Font Customization
+
+**Method 1: Google Fonts (Easiest)**
+1. Go to `Settings -> ThemeRevisionPlus Settings`
+2. Enable "Google Fonts"
+3. Enter font name (e.g., "Roboto", "Open Sans")
+4. Save settings
+
+**Method 2: Custom Font-Family (Code-level)**
+
+Edit `Asset/dev/css/base.css` or create custom CSS:
+```css
+body {
+    font-family: "Your Font", Helvetica, Arial, sans-serif !important;
+}
+```
+
+**Method 3: Override Task Title Font Weight**
+
+The plugin forces `font-weight:400` (normal) for Dark V2 task titles. To change:
+
+Edit `Model/CustomColorModel.php` line 125-127:
+```php
+$buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
+```
+Change `400` to:
+- `300` - Light
+- `400` - Normal (current)
+- `500` - Medium
+- `700` - Bold
+
+**Original Kanboard Font:**
+- Font-family: `"Helvetica Neue", Helvetica, Arial, sans-serif`
+- Font-weight: `400` (normal, not bold)
+
+#### Switching to Development Mode
+
+For live CSS editing without server deployment:
+
+1. ***Make sure*** `plugins/ThemeRevisionPlus/Asset` is ***writable and executable***
+2. Go to `Settings -> ThemeRevisionPlus Settings`
+3. Switch "Mode" to **Development**
+4. Edit raw CSS files in `Asset/dev/css/`
+5. Reload page to see changes immediately
+
+**Development vs Production:**
+- **Development**: Loads unminified CSS from `Asset/dev/css/` (slower, easier to edit)
+- **Production**: Loads minified `Asset/main.min.css` (faster, requires rebuild after edits)
+
+---
+
+### Color Scheme Comparison
+
+**When to use each:**
+
+- **User**: Let users choose their own theme (Light/Dark) in their profile
+- **Light**: Default Kanboard-like experience with light colors
+- **Dark**: Full custom dark theme with muted task colors (high contrast)
+- **Dark V2**: **Best for dark mode with readability** - Dark UI + bright task colors + black font
+- **Normal Dark**: Similar to Dark V2 but with Light palette task colors
+
+**Dark V2 Font Fix (2025-10-19):**
+Dark V2 originally used grey font (#ccc) on light task colors, making text unreadable. Fixed by injecting conditional CSS with black font (#000) for proper contrast. See [CLAUDE.md](CLAUDE.md) for full troubleshooting story.
 
 ## Mobile Usage Guide
 
