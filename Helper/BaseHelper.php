@@ -1,8 +1,8 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Helper;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Helper;
 use Kanboard\Core\Base;
-use Kanboard\Plugin\ThemeRevision\Plugin;
+use Kanboard\Plugin\ThemeRevisionPlus\Plugin;
 
 class BaseHelper extends Base
 {

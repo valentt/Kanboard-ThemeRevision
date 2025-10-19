@@ -5,6 +5,9 @@
         <?= t('If this feature is not working, please check the CSP settings on your server first.') ?> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank" style="border-bottom:1px dotted var(--color-greyscale-3);""><?= t('More') ?></a><br>
     </small></p>
     <div class="panel" style="border-left:var(--style-border-thk);">
+        <?= $this->form->checkbox('enable_google_fonts', t('Enable Google Fonts'), 1, $configs['enable_google_fonts']) ?>
+        <p><small><?= t('Uncheck to use Kanboard\'s default system fonts instead of Google Fonts') ?></small></p>
+        <hr>
         <label><b><?= t('UI') ?></b></label>
         <p><small><?= t('A font name for Most parts of the system UI. Example: ') ?><i>Noto Sans</i></small></p>
         <input type='text' value="<?= $configs['google_fonts']['ui'] ?>" name="google_fonts[ui]" placeholder="<?= t('Name, case-sensitive') ?>"/>

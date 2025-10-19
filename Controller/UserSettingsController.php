@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Controller;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Controller;
 use Kanboard\Controller\UserViewController;
 
 class UserSettingsController extends UserViewController

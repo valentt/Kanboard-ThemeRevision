@@ -1,15 +1,15 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Controller;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Controller;
 use Kanboard\Controller\ConfigController;
 
 class PluginConfigsController extends ConfigController
 {
     public function show(){
-        $data = $GLOBALS['themeRevisionConfig'];
+        $data = $GLOBALS['themeRevisionPlusConfig'];
 
-        $this->response->html($this->helper->layout->config('ThemeRevision:settings/configs', array(
-            'title' => t('Settings').' &gt; '.t('ThemeRevision Settings'),
+        $this->response->html($this->helper->layout->config('ThemeRevisionPlus:settings/configs', array(
+            'title' => t('Settings').' &gt; '.t('ThemeRevisionPlus Settings'),
             'configs' => $data,
             'end_keys' => array('light' => $this->getEndKeys($data['light_palette']), 'dark' => $this->getEndKeys($data['dark_palette'])),
             'color_diffs' => $this->helper->configsDataHelper->loadColorDiffs()
@@ -22,31 +22,32 @@ class PluginConfigsController extends ConfigController
             //checkbox value fix
             $values['overwrite_default_task_color'] = isset($values['overwrite_default_task_color']);
             $values['enable_google_material_icons'] = isset($values['enable_google_material_icons']);
-            foreach($GLOBALS['themeRevisionConfig']['column_header_info'] as $key => $value){
+            $values['enable_google_fonts'] = isset($values['enable_google_fonts']);
+            foreach($GLOBALS['themeRevisionPlusConfig']['column_header_info'] as $key => $value){
                 $values['column_header_info'][$key] = isset($values['column_header_info'][$key]);
             }
-            foreach($GLOBALS['themeRevisionConfig']['board_task_info'] as $key => $value){
+            foreach($GLOBALS['themeRevisionPlusConfig']['board_task_info'] as $key => $value){
                 $values['board_task_info'][$key] = isset($values['board_task_info'][$key]);
             }
             //add version info
             $values['version'] = $this->helper->configsDataHelper->getVersion();
 
             $this->helper->configsDataHelper->saveConfigs($values);
-            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevision',)));
+            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevisionPlus',)));
         }
     }
 
     public function dismiss(){
         if ($this->userSession->isAdmin()){
             $this->helper->configsDataHelper->removeColorDiffs();
-            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevision',)));
+            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevisionPlus',)));
         }
     }
 
     public function reset(){
         if ($this->userSession->isAdmin()){
             $this->helper->configsDataHelper->removeConfigs();
-            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevision',)));
+            $this->response->redirect($this->helper->url->to('PluginConfigsController', 'show', array('plugin' => 'ThemeRevisionPlus',)));
         }
     }
 

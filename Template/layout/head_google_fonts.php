@@ -1,4 +1,9 @@
 <?php
+// Check if Google Fonts is enabled
+$googleFontsEnabled = isset($GLOBALS['themeRevisionPlusConfig']['enable_google_fonts']) && $GLOBALS['themeRevisionPlusConfig']['enable_google_fonts'];
+
+if ($googleFontsEnabled) {
+    // Original Google Fonts loading logic
     $styles = "";
     $fonts = "@import url('https://fonts.googleapis.com/css2?";
 
@@ -18,7 +23,18 @@
     if (!empty($styles)){
         $styles = $fonts."display=swap');".":root{".$styles."}";
     }
-?>
-<?php if($styles): ?>
-    <style><?= $styles ?></style>
-<?php endif ?>
+
+    if ($styles): ?>
+        <style><?= $styles ?></style>
+    <?php endif;
+
+} else {
+    // Google Fonts disabled - use system defaults
+    ?>
+    <style>
+        :root {
+            --style-fontfamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+            --style-fontfamily-code: "Courier New", Courier, monospace !important;
+        }
+    </style>
+<?php } ?>

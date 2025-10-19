@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Model;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Model;
 use Kanboard\Model\ColorModel;
 
 class CustomColorModel extends ColorModel
@@ -97,7 +97,7 @@ class CustomColorModel extends ColorModel
 
     public function getDefaultColor()
     {
-        if (isset($GLOBALS['themeRevisionConfig']) && !$GLOBALS['themeRevisionConfig']['overwrite_default_task_color']){
+        if (isset($GLOBALS['themeRevisionPlusConfig']) && !$GLOBALS['themeRevisionPlusConfig']['overwrite_default_task_color']){
             return $this->configModel->get('default_color', 'yellow');
         }
         return 'grey';
@@ -106,7 +106,7 @@ class CustomColorModel extends ColorModel
     public function getCss()
     {
         $buffer = '';
-        if (isset($GLOBALS['themeRevisionConfig'])){
+        if (isset($GLOBALS['themeRevisionPlusConfig'])){
             $buffer .= ':root{';
             if($this->paletteColor == "auto"){
                 $buffer .= $this->getCssString("light");
@@ -118,16 +118,40 @@ class CustomColorModel extends ColorModel
                 $buffer .= $this->getCssString($this->paletteColor);
             }
             $buffer .= "}";
+
+            // Add task text color override based on palette
+            // Dark V2 and Normal Dark use light task colors → need black font
+            if($this->paletteColor == "dark_v2" || $this->paletteColor == "normal_dark"){
+                $buffer .= ".task-board a{color:#000!important;font-weight:400;}";
+                $buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;}";
+                $buffer .= ".task-board-title{color:#000!important;}";
+            }
+            // Light palette also needs black font
+            elseif($this->paletteColor == "light"){
+                $buffer .= ".task-board a{color:#000!important;font-weight:400;}";
+                $buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;}";
+                $buffer .= ".task-board-title{color:#000!important;}";
+            }
+            // Dark palette uses grey font for dark task colors
+            elseif($this->paletteColor == "dark"){
+                $buffer .= ".task-board a{color:#ccc!important;}";
+                $buffer .= ".task-board-title a{color:#ccc!important;}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#ccc!important;}";
+            }
         }
         $buffer .= parent::getCss();
-        
+
         return $buffer;
     }
 
     private function getCssString($color){
         $buffer = 'color-scheme:'.$color.';';
-        foreach ($GLOBALS['themeRevisionConfig'][$color.'_palette'] as $cssName => $cssValue) {
-            $buffer .= "--color-".$cssName.":".$cssValue.";";
+        foreach ($GLOBALS['themeRevisionPlusConfig'][$color.'_palette'] as $cssName => $cssValue) {
+            // Extract 'default' value from array if it's an array, otherwise use value directly
+            $actualValue = is_array($cssValue) ? $cssValue['default'] : $cssValue;
+            $buffer .= "--color-".$cssName.":".$actualValue.";";
         }
         return $buffer;
     }

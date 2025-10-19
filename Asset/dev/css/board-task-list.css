@@ -26,7 +26,7 @@
 	box-shadow: var(--style-shadow-heavy);
 }
 .task-board a {
-    color: var(--color-greyscale-1);
+    color: var(--color-task-text);
 }
 .draggable-placeholder {
     border: 1.5rem solid var(--color-greyscale-5);
@@ -37,7 +37,7 @@
 
 /*collapsed and expand*/
 .task-board-collapsed a.dropdown-menu strong{
-	color: var(--color-greyscale-1);
+	color: var(--color-task-text);
 }
 .task-board-expanded {
     overflow: hidden;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Helper;
-use Kanboard\Plugin\ThemeRevision\Helper\BaseHelper;
-use Kanboard\Plugin\ThemeRevision\Model\CustomColorModel;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Helper;
+use Kanboard\Plugin\ThemeRevisionPlus\Helper\BaseHelper;
+use Kanboard\Plugin\ThemeRevisionPlus\Model\CustomColorModel;
 
 class ColorSwitchHelper extends BaseHelper
 {
@@ -15,6 +15,18 @@ class ColorSwitchHelper extends BaseHelper
     public function setColor2Light(){
         $this->container['colorModel'] = $this->container->factory(function ($c) {
             return new CustomColorModel($c, "light");
+        });
+    }
+
+    public function setColor2NormalDark(){
+        $this->container['colorModel'] = $this->container->factory(function ($c) {
+            return new CustomColorModel($c, "normal_dark");
+        });
+    }
+
+    public function setColor2DarkV2(){
+        $this->container['colorModel'] = $this->container->factory(function ($c) {
+            return new CustomColorModel($c, "dark_v2");
         });
     }
 

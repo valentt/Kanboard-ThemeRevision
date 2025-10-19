@@ -1,3 +1,3 @@
-<li <?= $this->app->checkMenuSelection('PluginConfigsController', 'show', 'ThemeRevision') ?>>
-    <?= $this->url->link(t('ThemeRevision Settings'), 'PluginConfigsController', 'show', array('plugin' => 'ThemeRevision')) ?>
+<li <?= $this->app->checkMenuSelection('PluginConfigsController', 'show', 'ThemeRevisionPlus') ?>>
+    <?= $this->url->link(t('ThemeRevisionPlus Settings'), 'PluginConfigsController', 'show', array('plugin' => 'ThemeRevisionPlus')) ?>
 </li>

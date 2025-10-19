@@ -1,1 +1,46 @@
+# IDE and Editor
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# OS Files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Temporary Files
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
+*.log
+*.cache
+
+# Claude artifacts
+.claude/
+CLAUDE.md
+
+# Local development overrides
+config.local.php
+*.local.*
+
+# Node modules (if using npm for development)
+node_modules/
+package-lock.json
+
+# Composer (if using)
+vendor/
+composer.lock
+
+# Test files
+test/
+tests/
+*.test.php

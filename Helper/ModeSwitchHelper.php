@@ -1,7 +1,7 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Helper;
-use Kanboard\Plugin\ThemeRevision\Helper\BaseHelper;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Helper;
+use Kanboard\Plugin\ThemeRevisionPlus\Helper\BaseHelper;
 use MatthiasMullie\Minify;
 
 class ModeSwitchHelper extends BaseHelper
@@ -31,13 +31,13 @@ class ModeSwitchHelper extends BaseHelper
 
     public function productionMode(){
         $prdCSSFile = $this->getPluginPath().$this->prdCSSFile;
-		
+
         if(!file_exists($prdCSSFile)){
             $file = fopen($prdCSSFile, "w");
             fwrite($file, $this->minifyCSS());
             fclose($file);
         }
-        $this->getPlugin()->hook->on('template:layout:css', array('template' => 'plugins/ThemeRevision'.$this->prdCSSFile));
+        $this->getPlugin()->hook->on('template:layout:css', array('template' => 'plugins/ThemeRevisionPlus'.$this->prdCSSFile));
     }
 
     public function developmentMode(){
@@ -48,7 +48,7 @@ class ModeSwitchHelper extends BaseHelper
         }
         foreach ($this->devCSSFiles as $value)
         {
-            $this->getPlugin()->hook->on('template:layout:css', array('template' => 'plugins/ThemeRevision'.$value));
+            $this->getPlugin()->hook->on('template:layout:css', array('template' => 'plugins/ThemeRevisionPlus'.$value));
         }
     }
 

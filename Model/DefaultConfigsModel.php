@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Model;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Model;
 
 class DefaultConfigsModel
 {
@@ -13,10 +13,12 @@ class DefaultConfigsModel
         // 'development':   Load all CSS files in the "Asset/dev" folder.
         'mode'                              => array('default' => 'production', 'candidates' => array('production', 'development')),
 
-        // 'user':  Switch the color scheme by the users' choices. (default)
-        // 'light': Always show the light scheme.
-        // 'dark':  Always show the dark scheme.
-        'color_scheme'                      => array('default' => 'user',       'candidates' => array('user', 'light', 'dark')),
+        // 'user':        Switch the color scheme by the users' choices. (default)
+        // 'light':       Always show the light scheme (normal colors).
+        // 'dark':        Always show the dark scheme (dark task colors).
+        // 'dark_v2':     Dark backgrounds with bright task colors.
+        // 'normal_dark': Dark backgrounds with normal (light) task colors.
+        'color_scheme'                      => array('default' => 'user',       'candidates' => array('user', 'light', 'dark', 'dark_v2', 'normal_dark')),
         
         // Overwrite the default task color for better UI consistency. The option in project settings will be invalidated
         // 'true':  Overwrite to grey.  (default)
@@ -27,8 +29,12 @@ class DefaultConfigsModel
         // 'false': Keep Font Awesome icons.
         'enable_google_material_icons'      => array('default' => true,         'candidates' => array(true, false)),
 
+        // 'true':  Enable Google Fonts (default when fonts are configured).
+        // 'false': Disable Google Fonts and use Kanboard's default system fonts.
+        'enable_google_fonts'               => array('default' => false,        'candidates' => array(true, false)),
+
         // Override default fonts with "Google Fonts". Only one font family name supported by Google can be filled in for each category. Note: the font family name of a font may differ from it's general name.
-        // If this feature is not working, please check the CSP settings on your server first. 
+        // If this feature is not working, please check the CSP settings on your server first.
         // The default value for each category is empty.
         // 'ui':    A font name for Most parts of the system UI. Example: Noto Sans
         // 'codes': A font name for all code blocks, and statistics in the overview page. Monospaced fonts are recommended. Example: Noto Sans Mono
@@ -109,6 +115,9 @@ class DefaultConfigsModel
             'greyscale-4'                   => array('default' => '#f0f3f7'),
             'greyscale-5'                   => array('default' => '#f7f9fc'),
             'greyscale-6'                   => array('default' => '#fff'),
+
+            // Task text color (font color on task cards)
+            'task-text'                     => array('default' => '#000'),
 
             // Tasks
             // Grey
@@ -192,6 +201,9 @@ class DefaultConfigsModel
             'greyscale-5'                   => array('default' => '#2b292f'),
             'greyscale-6'                   => array('default' => '#302e35'),
 
+            // Task text color (grey font for contrast on dark task colors)
+            'task-text'                     => array('default' => '#ccc'),
+
             // Tasks
             // Grey
             'task-grey-bg'                  => array('default' => '#302e35'),
@@ -244,6 +256,176 @@ class DefaultConfigsModel
             'code-f'                        => array('default' => '#7641bb'),
 
             // shadow
+            'shadow-lit'                    => array('default' => 'rgba(0, 0, 0, .25)'),
+            'shadow-hev'                    => array('default' => 'rgba(0, 0, 0, .4)')
+        ),
+        'normal_dark_palette' => array(
+            // Messages & Actions (from dark)
+            'brand-prim'                    => array('default' => '#3860f4'),
+            'brand-cont'                    => array('default' => '#e7f0ff'),
+            'brand-secd'                    => array('default' => '#051646'),
+
+            'info-prim'                     => array('default' => '#3860f4'),
+            'info-cont'                     => array('default' => '#d4d7ff'),
+
+            'reminder-prim'                 => array('default' => '#a46a01'),
+            'reminder-cont'                 => array('default' => '#ffe4be'),
+
+            'warning-prim'                  => array('default' => '#b62500'),
+            'warning-cont'                  => array('default' => '#fbd0d6'),
+            'warning-secd'                  => array('default' => '#450909'),
+
+            'success-prim'                  => array('default' => '#09590d'),
+            'success-cont'                  => array('default' => '#82c483'),
+
+            // Greyscales (from dark)
+            'greyscale-1'                   => array('default' => '#ccc'),
+            'greyscale-2'                   => array('default' => 'rgba(255, 255, 255, .15)'),
+            'greyscale-3'                   => array('default' => 'rgba(255, 255, 255, .043)'),
+            'greyscale-4'                   => array('default' => '#27262c'),
+            'greyscale-5'                   => array('default' => '#2b292f'),
+            'greyscale-6'                   => array('default' => '#302e35'),
+
+            // Task text color (black font for light task colors)
+            'task-text'                     => array('default' => '#000'),
+
+            // Tasks (from light - normal bright colors)
+            // Grey
+            'task-grey-bg'                  => array('default' => '#fff'),
+            'task-grey-bdr'                 => array('default' => '#dce0e7'),
+            'task-dark-grey-bg'             => array('default' => '#e7eaef'),
+            'task-dark-grey-bdr'            => array('default' => '#cfd2d9'),
+            // Red
+            'task-pink-bg'                  => array('default' => '#ffb3cc'),
+            'task-pink-bdr'                 => array('default' => '#f99dbe'),
+            'task-red-bg'                   => array('default' => '#ffbdbd'),
+            'task-red-bdr'                  => array('default' => '#ffa7a7'),
+            // Orange
+            'task-orange-bg'                => array('default' => '#ffd3ab'),
+            'task-orange-bdr'               => array('default' => '#ffbc80'),
+            'task-deep-orange-bg'           => array('default' => '#fdbca8'),
+            'task-deep-orange-bdr'          => array('default' => '#fda489'),
+            // Yellow
+            'task-yellow-bg'                => array('default' => '#ffe778'),
+            'task-yellow-bdr'               => array('default' => '#f7d349'),
+            'task-amber-bg'                 => array('default' => '#fdce63'),
+            'task-amber-bdr'                => array('default' => '#edb942'),
+            'task-brown-bg'                 => array('default' => '#d9d2d0'),
+            'task-brown-bdr'                => array('default' => '#d1bbb7'),
+            // Lime
+            'task-lime-bg'                  => array('default' => '#e6ee9c'),
+            'task-lime-bdr'                 => array('default' => '#d5db3e'),
+            // Green
+            'task-light-green-bg'           => array('default' => '#dcedc8'),
+            'task-light-green-bdr'          => array('default' => '#acdb82'),
+            'task-green-bg'                 => array('default' => '#bdf4cb'),
+            'task-green-bdr'                => array('default' => '#87eda1'),
+            // Cyan
+            'task-cyan-bg'                  => array('default' => '#b7faf7'),
+            'task-cyan-bdr'                 => array('default' => '#9ae7e4'),
+            'task-teal-bg'                  => array('default' => '#aaecdd'),
+            'task-teal-bdr'                 => array('default' => '#87dbc7'),
+            // Blue
+            'task-blue-bg'                  => array('default' => '#dae4ff'),
+            'task-blue-bdr'                 => array('default' => '#c3ccf1'),
+            // Purple
+            'task-purple-bg'                => array('default' => '#eacbff'),
+            'task-purple-bdr'               => array('default' => '#dfb1ff'),
+
+            // Code Highlight (from dark)
+            'code-a'                        => array('default' => '#c56200'),
+            'code-b'                        => array('default' => '#d92792'),
+            'code-c'                        => array('default' => '#cc5e91'),
+            'code-d'                        => array('default' => '#3787c7'),
+            'code-e'                        => array('default' => '#0d7d6c'),
+            'code-f'                        => array('default' => '#7641bb'),
+
+            // shadow (from dark)
+            'shadow-lit'                    => array('default' => 'rgba(0, 0, 0, .25)'),
+            'shadow-hev'                    => array('default' => 'rgba(0, 0, 0, .4)')
+        ),
+        'dark_v2_palette' => array(
+            // Messages & Actions (COPY from dark - IDENTICAL)
+            'brand-prim'                    => array('default' => '#3860f4'),
+            'brand-cont'                    => array('default' => '#e7f0ff'),
+            'brand-secd'                    => array('default' => '#051646'),
+
+            'info-prim'                     => array('default' => '#3860f4'),
+            'info-cont'                     => array('default' => '#d4d7ff'),
+
+            'reminder-prim'                 => array('default' => '#a46a01'),
+            'reminder-cont'                 => array('default' => '#ffe4be'),
+
+            'warning-prim'                  => array('default' => '#b62500'),
+            'warning-cont'                  => array('default' => '#fbd0d6'),
+            'warning-secd'                  => array('default' => '#450909'),
+
+            'success-prim'                  => array('default' => '#09590d'),
+            'success-cont'                  => array('default' => '#82c483'),
+
+            // Greyscales (COPY from dark - IDENTICAL)
+            'greyscale-1'                   => array('default' => '#ccc'),
+            'greyscale-2'                   => array('default' => 'rgba(255, 255, 255, .15)'),
+            'greyscale-3'                   => array('default' => 'rgba(255, 255, 255, .043)'),
+            'greyscale-4'                   => array('default' => '#27262c'),
+            'greyscale-5'                   => array('default' => '#2b292f'),
+            'greyscale-6'                   => array('default' => '#302e35'),
+
+            // Task text color (black font for light Kanboard task colors)
+            'task-text'                     => array('default' => '#000'),
+
+            // Tasks (ORIGINAL KANBOARD COLORS from app/Model/ColorModel.php)
+            // Grey
+            'task-grey-bg'                  => array('default' => '#eeeeee'),
+            'task-grey-bdr'                 => array('default' => '#cccccc'),
+            'task-dark-grey-bg'             => array('default' => '#cfd8dc'),
+            'task-dark-grey-bdr'            => array('default' => '#455a64'),
+            // Red
+            'task-pink-bg'                  => array('default' => '#f48fb1'),
+            'task-pink-bdr'                 => array('default' => '#d81b60'),
+            'task-red-bg'                   => array('default' => '#ffbbbb'),
+            'task-red-bdr'                  => array('default' => '#ff9797'),
+            // Orange
+            'task-orange-bg'                => array('default' => '#ffd7b3'),
+            'task-orange-bdr'               => array('default' => '#ffac62'),
+            'task-deep-orange-bg'           => array('default' => '#ffab91'),
+            'task-deep-orange-bdr'          => array('default' => '#e64a19'),
+            // Yellow
+            'task-yellow-bg'                => array('default' => '#f5f7c4'),
+            'task-yellow-bdr'               => array('default' => '#dfe32d'),
+            'task-amber-bg'                 => array('default' => '#ffe082'),
+            'task-amber-bdr'                => array('default' => '#ffa000'),
+            'task-brown-bg'                 => array('default' => '#d7ccc8'),
+            'task-brown-bdr'                => array('default' => '#4e342e'),
+            // Lime
+            'task-lime-bg'                  => array('default' => '#e6ee9c'),
+            'task-lime-bdr'                 => array('default' => '#afb42b'),
+            // Green
+            'task-light-green-bg'           => array('default' => '#dcedc8'),
+            'task-light-green-bdr'          => array('default' => '#689f38'),
+            'task-green-bg'                 => array('default' => '#bdf4cb'),
+            'task-green-bdr'                => array('default' => '#4ae371'),
+            // Cyan
+            'task-cyan-bg'                  => array('default' => '#b2ebf2'),
+            'task-cyan-bdr'                 => array('default' => '#00bcd4'),
+            'task-teal-bg'                  => array('default' => '#80cbc4'),
+            'task-teal-bdr'                 => array('default' => '#00695c'),
+            // Blue
+            'task-blue-bg'                  => array('default' => '#dbebff'),
+            'task-blue-bdr'                 => array('default' => '#a8cfff'),
+            // Purple
+            'task-purple-bg'                => array('default' => '#dfb0ff'),
+            'task-purple-bdr'               => array('default' => '#cd85fe'),
+
+            // Code Highlight (COPY from dark - IDENTICAL)
+            'code-a'                        => array('default' => '#c56200'),
+            'code-b'                        => array('default' => '#d92792'),
+            'code-c'                        => array('default' => '#cc5e91'),
+            'code-d'                        => array('default' => '#3787c7'),
+            'code-e'                        => array('default' => '#0d7d6c'),
+            'code-f'                        => array('default' => '#7641bb'),
+
+            // shadow (COPY from dark - IDENTICAL)
             'shadow-lit'                    => array('default' => 'rgba(0, 0, 0, .25)'),
             'shadow-hev'                    => array('default' => 'rgba(0, 0, 0, .4)')
         )

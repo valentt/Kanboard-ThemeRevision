@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Model;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Model;
 
 class TaskInfoCSSModel
 {

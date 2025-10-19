@@ -1,10 +1,10 @@
 <?php
 
-namespace Kanboard\Plugin\ThemeRevision\Helper;
+namespace Kanboard\Plugin\ThemeRevisionPlus\Helper;
 
 use Kanboard\Core\Base;
-use Kanboard\Plugin\ThemeRevision\Helper\BaseHelper;
-use Kanboard\Plugin\ThemeRevision\Model\DefaultConfigsModel;
+use Kanboard\Plugin\ThemeRevisionPlus\Helper\BaseHelper;
+use Kanboard\Plugin\ThemeRevisionPlus\Model\DefaultConfigsModel;
 
 class ConfigsDataHelper extends BaseHelper
 {
@@ -78,23 +78,23 @@ class ConfigsDataHelper extends BaseHelper
             return $oldConfigs;
         }  
         // no data in db and no config file
-        if (empty($dbConfigs) && !file_exists('plugins/ThemeRevision/config.php')){
+        if (empty($dbConfigs) && !file_exists('plugins/ThemeRevisionPlus/config.php')){
             return $oldConfigs;
         }
         // no data and has config file
-        if (empty($dbConfigs) && file_exists('plugins/ThemeRevision/config.php')){
-            $themeRevisionConfig;
+        if (empty($dbConfigs) && file_exists('plugins/ThemeRevisionPlus/config.php')){
+            $themeRevisionPlusConfig;
             // load data
-            if (file_exists('plugins/ThemeRevision/config-default.php')){
-                require_once('plugins/ThemeRevision/config-default.php');
+            if (file_exists('plugins/ThemeRevisionPlus/config-default.php')){
+                require_once('plugins/ThemeRevisionPlus/config-default.php');
             }
-            if (file_exists('plugins/ThemeRevision/config.php')){
-                require_once('plugins/ThemeRevision/config.php');
+            if (file_exists('plugins/ThemeRevisionPlus/config.php')){
+                require_once('plugins/ThemeRevisionPlus/config.php');
             }
-            if (!empty($themeRevisionConfig)){
-                $themeRevisionConfig = $this->toV2Format($themeRevisionConfig);
+            if (!empty($themeRevisionPlusConfig)){
+                $themeRevisionPlusConfig = $this->toV2Format($themeRevisionPlusConfig);
             }
-            return $themeRevisionConfig;
+            return $themeRevisionPlusConfig;
         }
         // other
         return $oldConfigs;
