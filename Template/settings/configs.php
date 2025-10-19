@@ -39,6 +39,9 @@
         <!-- Corner Radius -->
         <?= $this->render('ThemeRevisionPlus:settings/configs/corner_radius', array('configs' => $configs)) ?>
 
+        <!-- Font Weight -->
+        <?= $this->render('ThemeRevisionPlus:settings/configs/font_weight', array('configs' => $configs)) ?>
+
         <!-- Light Palette -->
         <?= $this->render('ThemeRevisionPlus:settings/configs/palette', array('configs' => $configs, 'end_keys' => $end_keys, 'color' => 'light')) ?>
 

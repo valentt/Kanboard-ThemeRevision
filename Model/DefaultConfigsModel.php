@@ -77,7 +77,11 @@ class DefaultConfigsModel
 
         // The corner radius for all elements.
         'corner_radius' => array('default' => '4px'),
-        
+
+        // Font weight for task titles and text
+        // 300 = Light, 400 = Normal (Kanboard default), 500 = Medium, 700 = Bold
+        'font_weight' => array('default' => '400'),
+
         // Color Palettes
         // *-prim (primary):      button background, link, selected, alert foreground, helps or hints ...
         // *-secd (secondary):    hovered button foreground, linked comment ...

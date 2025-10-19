@@ -119,26 +119,31 @@ class CustomColorModel extends ColorModel
             }
             $buffer .= "}";
 
+            // Get font weight from config (default: 400 = Normal)
+            $fontWeight = isset($GLOBALS['themeRevisionPlusConfig']['font_weight'])
+                ? $GLOBALS['themeRevisionPlusConfig']['font_weight']
+                : '400';
+
             // Add task text color override based on palette
             // Dark V2 and Normal Dark use light task colors → need black font
             if($this->paletteColor == "dark_v2" || $this->paletteColor == "normal_dark"){
-                $buffer .= ".task-board a{color:#000!important;font-weight:400;}";
-                $buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
-                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;}";
+                $buffer .= ".task-board a{color:#000!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-title a{color:#000!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;font-weight:{$fontWeight};}";
                 $buffer .= ".task-board-title{color:#000!important;}";
             }
             // Light palette also needs black font
             elseif($this->paletteColor == "light"){
-                $buffer .= ".task-board a{color:#000!important;font-weight:400;}";
-                $buffer .= ".task-board-title a{color:#000!important;font-weight:400;}";
-                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;}";
+                $buffer .= ".task-board a{color:#000!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-title a{color:#000!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#000!important;font-weight:{$fontWeight};}";
                 $buffer .= ".task-board-title{color:#000!important;}";
             }
             // Dark palette uses grey font for dark task colors
             elseif($this->paletteColor == "dark"){
-                $buffer .= ".task-board a{color:#ccc!important;}";
-                $buffer .= ".task-board-title a{color:#ccc!important;}";
-                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#ccc!important;}";
+                $buffer .= ".task-board a{color:#ccc!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-title a{color:#ccc!important;font-weight:{$fontWeight};}";
+                $buffer .= ".task-board-collapsed a.dropdown-menu strong{color:#ccc!important;font-weight:{$fontWeight};}";
             }
         }
         $buffer .= parent::getCss();
