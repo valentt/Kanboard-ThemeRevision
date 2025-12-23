@@ -31,7 +31,8 @@ header {
 }
 #board-container {
 	background: var(--color-greyscale-4);
-	overflow-x:inherit
+	overflow-x: auto;
+	/* Fix: Enable horizontal scrolling on desktop for boards with many columns */
 }
 .sidebar-container{
 	/*max-width: calc(var(--size-width-def) + var(--size-width-comp) + 4rem);*/
@@ -110,7 +111,7 @@ header {
 	box-sizing: border-box;
 }
 .accordion-section > *{
-    max-width: 900px;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
 }

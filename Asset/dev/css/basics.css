@@ -90,6 +90,7 @@ body {
 	padding: .5rem 2rem;
 	font-family: var(--style-fontfamily);
 	text-rendering: optimizeLegibility;
+	overflow-x: auto; /* Override core CSS overflow-x:hidden to enable horizontal scroll */
 }
 body.TR a {
 	font-size: 1rem;

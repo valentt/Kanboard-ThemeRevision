@@ -1,6 +1,7 @@
 #task-view .sidebar-content > * {
-    max-width: 900px;
+    max-width: 90%;
     margin: auto;
+    /* Changed to 90% for natural responsive width */
 }
 #task-view .sidebar-content #comments{
     background: var(--color-greyscale-4);
@@ -86,7 +87,7 @@
     background: none;
     line-height: 3rem !important;
     text-shadow: 0 0 1em var(--color-greyscale-6);
-    max-width: 900px;
+    max-width: 90%;
 }
 #task-summary .accordion-section {
     display: none;
@@ -107,7 +108,7 @@
     margin: 0 0 -1rem;
     border: inherit;
     width: 100%;
-    max-width: 900px;
+    max-width: 90%;
     box-sizing: border-box;
     border-top: 0;
     border-width: 0;
@@ -126,7 +127,7 @@
     border-width: 0;
     justify-content: space-between;
     padding: 1rem 0 0;
-    max-width: 900px;
+    max-width: 90%;
     margin: auto;
 }
 #task-summary .task-summary-column {

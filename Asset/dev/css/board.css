@@ -1,5 +1,14 @@
 #board {
 	border-right: none;
+	width: max-content;
+	min-width: 100%;
+	table-layout: auto; /* Override core CSS table-layout:fixed to allow columns to expand */
+}
+
+/* Ensure non-collapsed columns have minimum width for horizontal scroll */
+#board td.board-column-tasks,
+#board th.board-column-header:not(.board-column-header-collapsed) {
+	min-width: 180px;
 }
 #board td,
 #board th {
